@@ -1,0 +1,52 @@
+﻿@model Blog.Entity.Helpers.FilteredList<Blog.Entity.User.Users>
+
+@{
+    ViewBag.Title = "Yöneticiler";
+}
+
+<section id="main-content" class="column column-offset-15">
+    <div class="row grid-responsive">
+        <div class="column">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Yöneticiler</h3>
+                </div>
+                <form method="get">
+                    @Html.Partial("/Views/Helper/Table_Search.cshtml", Model.filter)
+                </form>
+                <div class="card-block">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>İsim</th>
+                                <th>Mail</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.data)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Mail</td>
+                                    <td style="width: 20px;"><button class="button background-primary" onclick="window.location.href='/user/@item.ID'">Düzenle</button></td>
+                                    <td style="width: 20px;"><button class="button background-danger" data-toggle="modal" data-target="#delete" onclick="List.Delete(@item.ID)">Kaldır</button></td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @Html.Partial("/Views/Helper/Table_Pager.cshtml", Model.filter.pager)
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="button background-primary" onclick="location.href='/user/'">Yeni Yönetici Ekle</button>
+</section>
+@Html.Partial("/Views/List/Partial/DeleteUser.cshtml")
+@section customScripts{
+    <link rel="stylesheet" href="~/Content/plugins/modal/css/bootstrap.css">
+    <script src="~/Content/plugins/modal/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/App.js"></script>
+    <script src="~/Content/js/Listing.js"></script>
+}

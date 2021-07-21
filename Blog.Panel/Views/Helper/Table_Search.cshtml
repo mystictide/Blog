@@ -1,0 +1,60 @@
+﻿@model Blog.Entity.Helpers.Filter
+
+<div class="column">
+    <div class="row">
+        <div class="col-md-4">
+            @*<div class="ButtonselectedRemove left">
+                <button type="button" data-toggle="tooltip" data-title="Seçilenleri Sil">
+                    <i class="fa fa-trash-alt"></i> Sil
+                </button>
+            </div>
+            <div class="ButtonselectedTransfer left">
+                <button type="button" data-toggle="tooltip" data-title="Seçilenleri Aktar">
+                    <i class="fa fa-upload"></i> Aktar
+                </button>
+            </div>*@
+
+            @if (!Model.isDetailSearch)
+            {
+                <div class="">
+                    <input type="text" id="Keyword" name="Keyword" value="@Model.Keyword" placeholder="Hızlı filtreleme" style=" width: 15vw; margin-right:-15px;"/>
+                    <button type="submit" class="button button-search" onclick="return KodTable.SearhButton(this)"> ARA </button>
+                    @*<button type="submit" class="button button-clear" onclick="return KodTable.SearchClear()" data-toggle="tooltip" data-title="Temizle">
+                        <i class="fa fa-sync-alt"></i>
+                    </button>*@
+                </div>
+            }
+
+            <div class="clear"></div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+        @*<div class="col-md-4">
+            @Html.DropDownList("pageSize", new SelectList(new[]
+            {
+                new { Value = 5, Text = "5" },
+                new { Value = 10, Text = "10" },
+                new { Value = 50, Text = "50" },
+                new { Value = 100, Text = "100" }
+            },
+            "Value", "Text", Model.pageSize),
+            new
+                 {
+                @class = "form-control pageSize right",
+                @onchange = "KodTable.pageSizeChange(this)"
+            })
+
+            <div class="table-header-buttons right">
+                <button type="button" class="button-excel" data-toggle="tooltip" data-title="Excel" onclick="KodTable.Export.Excel(this)">
+                    <i class="fa fa-file-excel"></i>
+                </button>
+                <button type="button" class="button-print" data-toggle="tooltip" data-title="Yazdır" onclick="KodTable.Export.Print(this)">
+                    <i class="fa fa-print"></i>
+                </button>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>*@
+    </div>
+</div>

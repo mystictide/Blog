@@ -1,0 +1,75 @@
+﻿@model Blog.Entity.Blog.Posts
+
+@{
+    ViewBag.Title = "Yazı düzenle";
+    var Categories = (List<Blog.Entity.Blog.Categories>)ViewBag.Categories;
+}
+
+<section id="main-content" class="column column-offset-15">
+    <div class="row grid-responsive">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    @if (Model.ID == 0)
+                    {
+                        <h3>Yeni Yazı</h3>
+                    }
+                    else
+                    {
+                        <h3>@Model.Title</h3>
+                    }
+                </div>
+                <div class="card-block">
+                    <form action="/post" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                        @Html.HiddenFor(model => model.UserID)
+                        <fieldset>
+                            <label for="Title">Başlık</label>
+                            @Html.TextBoxFor(model => model.Title)
+                        </fieldset>
+                        <fieldset>
+                            <label for="Date">Tarih</label>
+                            @Html.TextBoxFor(model => model.Date, new { @Value = Model.Date.ToString("dd/MM/yyyy") })
+                        </fieldset>
+                        <fieldset>
+                            <label for="Categories">Kategoriler</label>
+                            @Html.ListBoxFor(model => model.Categories, new SelectList(Categories, "ID", "Name", Model.Categories), new { @class = "form-control", @data_placeholder = "Kategori seçiniz" })
+                        </fieldset>
+                        <fieldset>
+                            <label for="Body">İçerik</label>
+                            @Html.TextBoxFor(model => model.Body)
+                        </fieldset>
+                        <input class="button-primary" type="submit" value="Kaydet">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section customScripts{
+    <link href="~/Content/plugins/chosen/css/chosen.min.css" rel="stylesheet" />,
+    <script src="~/Content/plugins/validate/js/jquery.validate.min.js"></script>
+    <script src="~/Content/plugins/validate/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/plugins/validate/js/jquery.validate.overrides.js"></script>
+    <script src="~/Content/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Content/plugins/chosen/js/chosen.jquery.min.js"></script>
+    <link href="~/Content/plugins/jqueryui/css/jquery-ui.css" rel="stylesheet">
+    <link href="~/Content/plugins/datetimepicker/css/jquery.datetimepicker.min.css" rel="stylesheet">
+    <script src="~/Content/plugins/datetimepicker/js/jquery.datetimepicker.full.min.js"></script>
+    <script src="~/Content/plugins/datetimepicker/js/datepicker-tr.js"></script>
+    <script>
+        CKEDITOR.replace('Body', {
+            language: 'tr'
+        });
+
+        $("#Categories").chosen();
+        $("#Date").datepicker({
+            changeYear: true,
+            changeMonth: true,
+            yearRange: "2019:2030",
+        });
+
+    </script>
+}
