@@ -4,6 +4,7 @@ using Blog.Entity.Blog;
 using Blog.Entity.Helpers;
 using Blog.Entity.User;
 using Blog.Panel.App_Start;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using static Blog.Panel.FilterConfig;
 
@@ -20,10 +21,14 @@ namespace Blog.Panel.Controllers
             user = UserAuthorize.GetAuthCookie();
         }
 
-        [Route("user/{ID}")]
-        public ActionResult ProcessUser(int ID)
+        [Route("user/{ID?}")]
+        public ActionResult ProcessUser(int? ID)
         {
-            var model = new UserManager().Get(ID);
+            var model = new Users();
+            if (ID.HasValue)
+            {
+                model = new UserManager().Get(ID.Value);
+            }
             return View(model);
         }
 
@@ -35,7 +40,7 @@ namespace Blog.Panel.Controllers
             {
                 result = new UserManager().Update(model);
             }
-            return Redirect("~/user/" + model.ID);
+            return Redirect("~/users");
         }
 
         [Route("post/{ID?}")]
@@ -51,9 +56,10 @@ namespace Blog.Panel.Controllers
         }
 
         [Route("post"), HttpPost]
-        public ActionResult ProcessPost(Posts model)
+        public ActionResult ProcessPost(Posts model, List<int> drop)
         {
             model.UserID = user.ID;
+            model.Categories = drop;
             ProcessResult result = new ProcessResult();
 
             result = new PostManager().ProcessPost(model);

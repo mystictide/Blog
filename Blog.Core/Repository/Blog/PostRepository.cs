@@ -100,9 +100,24 @@ namespace Blog.Core.Repository.Blog
         {
             try
             {
-                using (var con = GetConnection)
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@ID", ID);
+
+                string query = $@"
+                SELECT *
+                FROM Posts
+                WHERE ID = @ID";
+
+                string junkquery = $@"
+                SELECT CategoryID
+                FROM PostCategoryJunk
+                WHERE PostID = @ID";
+
+                using (var connection = GetConnection)
                 {
-                    return con.Get<Posts>(ID);
+                    var model = connection.QueryFirstOrDefault<Posts>(query, param);
+                    model.Categories = connection.Query<int>(junkquery, param).ToList();
+                    return model;
                 }
             }
             catch (Exception ex)

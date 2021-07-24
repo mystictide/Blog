@@ -52,6 +52,7 @@ namespace Blog.Business.Blog
 
         public ProcessResult Delete(int ID)
         {
+            new PostCategoryJunkManager().DeleteAllbyPost(ID);
             return _repo.Delete(ID);
         }
 
