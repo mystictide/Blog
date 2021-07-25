@@ -17,37 +17,70 @@
                     }
                     else
                     {
-                        <h3>@Model.Title</h3>
+                        <h3>@Model.TitleTUR</h3>
                     }
                 </div>
                 <div class="card-block">
-                    <form action="/post" method="post">
+                    <form action="/post" method="post" enctype="multipart/form-data">
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(model => model.ID)
                         @Html.HiddenFor(model => model.UserID)
-                        <fieldset>
-                            <label for="Title">Başlık</label>
-                            @Html.TextBoxFor(model => model.Title)
+                        <div style="display: block">
+                            <fieldset style="width: 350px; float:left; margin-right:35px">
+                                <label for="Title">Başlık (Türkçe)</label>
+                                @Html.TextBoxFor(model => model.TitleTUR)
+                            </fieldset>
+                            <fieldset style="width: 350px;">
+                                <label for="Title">Başlık (İngilizce)</label>
+                                @Html.TextBoxFor(model => model.TitleENG)
+                            </fieldset>
+                        </div>
+                        <div style="display:block;">
+                            <fieldset style="width: 350px; float: left; margin-right: 35px ">
+                                <label for="Title">Özet (Türkçe)(opsiyonel)</label>
+                                @Html.TextBoxFor(model => model.SummaryTUR)
+                            </fieldset>
+                            <fieldset style="width: 350px;">
+                                <label for="Title">Özet (İngilizce)(opsiyonel)</label>
+                                @Html.TextBoxFor(model => model.SummaryENG)
+                            </fieldset>
+                        </div>
+                        <div style="display: block;">
+                            <fieldset style="width: 350px; float: left; margin-right: 35px ">
+                                <label for="Date">Tarih</label>
+                                @if (1900 < Model.Date.Year)
+                                {
+                                    @Html.TextBoxFor(model => model.Date, new { @Value = Model.Date.ToString("dd/MM/yyyy"), @Style = "width: 350px;" })
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.Date, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @Style = "width: 350px;" })
+                                }
+                            </fieldset>
+                            <fieldset style="width: 350px; height: 90px;">
+                                <label for="Categories">Kategoriler</label>
+                                @Html.ListBox("drop", new MultiSelectList(CategoryList, "ID", "Name", Model.Categories), new { @class = "form-control", @data_placeholder = "Kategori seçiniz" })
+                            </fieldset>
+                        </div>                     
+                        <fieldset style="max-width: 735px;">
+                            <label for="Body">İçerik (Türkçe)</label>
+                            @Html.TextAreaFor(model => model.BodyTUR)
+                        </fieldset>
+                        <fieldset style="max-width: 735px;">
+                            <label for="Body">İçerik (İngilizce)</label>
+                            @Html.TextAreaFor(model => model.BodyENG)
                         </fieldset>
                         <fieldset>
-                            <label for="Date">Tarih</label>
-                            @if (1900 < Model.Date.Year)
-                            {
-                                @Html.TextBoxFor(model => model.Date, new { @Value = Model.Date.ToString("dd/MM/yyyy") })
-                            }
-                            else
-                            {
-                                @Html.TextBoxFor(model => model.Date, new { @Value = DateTime.Now.ToString("dd/MM/yyyy") })
-                            }
+                            <label for="Title">Banner Fotoğrafı (opsiyonel)</label>
+                            <input name="fileinput" type="file" id="fileinput" />
                         </fieldset>
-                        <fieldset>
-                            <label for="Categories">Kategoriler</label>
-                            @Html.ListBox("drop", new MultiSelectList(CategoryList, "ID", "Name", Model.Categories), new { @class = "form-control", @data_placeholder = "Kategori seçiniz" })
-                        </fieldset>
-                        <fieldset>
-                            <label for="Body">İçerik</label>
-                            @Html.TextAreaFor(model => model.Body)
-                        </fieldset>
+                        @if (Model.Banner != null)
+                        {
+                            <fieldset id="banner">
+                                <img src="~/images/posts/@Model.Banner" width="735" height="300" />
+                            </fieldset>
+                            <button type="button" id="delBanner" onclick="Post.DeleteBanner(@Model.ID)">Fotoğrafı Kaldır</button>
+                        }
                         <input class="button-primary" type="submit" value="Kaydet">
                     </form>
                 </div>
@@ -64,8 +97,13 @@
     <link href="~/Content/plugins/datetimepicker/css/jquery.datetimepicker.min.css" rel="stylesheet">
     <script src="~/Content/plugins/datetimepicker/js/jquery.datetimepicker.full.min.js"></script>
     <script src="~/Content/plugins/datetimepicker/js/datepicker-tr.js"></script>
+    <script src="~/Content/js/Listing.js"></script>
     <script>
-        CKEDITOR.replace('Body', {
+        CKEDITOR.replace('BodyTUR', {
+            language: 'tr'
+        });
+
+        CKEDITOR.replace('BodyENG', {
             language: 'tr'
         });
 

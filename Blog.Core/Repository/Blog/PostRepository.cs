@@ -66,7 +66,7 @@ namespace Blog.Core.Repository.Blog
                 param.Add("@Keyword", request.filter.Keyword);
                 param.Add("@PageSize", request.filter.pageSize);
 
-                string WhereClause = @" WHERE (t.Title like '%' + @Keyword + '%')";
+                string WhereClause = @" WHERE (t.TitleTUR like '%' + @Keyword + '%')";
 
                 string query_count = $@"  Select Count(t.ID) from Posts t {WhereClause}";
 

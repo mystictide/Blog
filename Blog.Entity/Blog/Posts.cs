@@ -11,9 +11,14 @@ namespace Blog.Entity.Blog
         [Key]
         public int ID { get; set; }
         public int UserID { get; set; }
-        public string Title { get; set; }
+        public string TitleTUR { get; set; }
+        public string TitleENG { get; set; }
+        public string SummaryTUR { get; set; }
+        public string SummaryENG { get; set; }
         [AllowHtml]
-        public string Body { get; set; }
+        public string BodyTUR { get; set; }
+        [AllowHtml]
+        public string BodyENG { get; set; }
         public string Banner { get; set; }
         public DateTime Date { get; set; }
 

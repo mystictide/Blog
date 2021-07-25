@@ -5,6 +5,7 @@ using Blog.Entity.Helpers;
 using Blog.Entity.User;
 using Blog.Panel.App_Start;
 using System.Collections.Generic;
+using System.IO;
 using System.Web.Mvc;
 using static Blog.Panel.FilterConfig;
 
@@ -52,6 +53,7 @@ namespace Blog.Panel.Controllers
             {
                 model = new PostManager().Get(ID.Value);
             }
+
             return View(model);
         }
 
@@ -63,7 +65,43 @@ namespace Blog.Panel.Controllers
             ProcessResult result = new ProcessResult();
 
             result = new PostManager().ProcessPost(model);
+
+            try
+            {
+                foreach (string file in Request.Files)
+                {
+                    var FileData = Request.Files[file];
+                    if (FileData.ContentLength > 0)
+                    {
+                        string _Ext = Path.GetExtension(FileData.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/images/posts/"));
+                        if (!Directory.Exists(_path))
+                        {
+                            Directory.CreateDirectory(_path);
+                        }
+                        FileData.SaveAs(_path + result.ReturnID + _Ext);
+                        model.ID = result.ReturnID;
+                        model.Banner = result.ReturnID + _Ext;
+                        new PostManager().Update(model);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
             return Redirect("~/post/" + result.ReturnID);
+        }
+
+        [Route("post/delbanner/")]
+        public JsonResult DeleteBanner(int ID)
+        {
+            var model = new PostManager().Get(ID);
+            new PostManager().DeleteBanner(model.Banner);
+            model.Banner = null;
+            new PostManager().Update(model);       
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [Route("category/{ID?}")]

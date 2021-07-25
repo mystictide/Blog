@@ -4,6 +4,8 @@ using Blog.Entity.Blog;
 using Blog.Entity.Helpers;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Web.Hosting;
 
 namespace Blog.Business.Blog
 {
@@ -40,6 +42,7 @@ namespace Blog.Business.Blog
                 }
                 new PostCategoryJunkManager().DeleteAllbyPost(result.ReturnID); 
                 new PostCategoryJunkManager().Add(categories);
+
                 return result;
             }
             catch (Exception ex)
@@ -52,7 +55,18 @@ namespace Blog.Business.Blog
 
         public ProcessResult Delete(int ID)
         {
+            var model = new PostManager().Get(ID);
             new PostCategoryJunkManager().DeleteAllbyPost(ID);
+            try
+            {
+                if (File.Exists(Path.Combine(HostingEnvironment.MapPath("~/images/posts/"), model.Banner)))
+                {
+                    File.Delete(Path.Combine(HostingEnvironment.MapPath("~/images/posts/"), model.Banner));
+                }
+            }
+            catch (Exception)
+            {
+            }
             return _repo.Delete(ID);
         }
 
@@ -64,6 +78,21 @@ namespace Blog.Business.Blog
         public Posts Get(int ID)
         {
             return _repo.Get(ID);
+        }
+
+        public bool DeleteBanner(string Banner)
+        {
+            try
+            {
+                if (File.Exists(Path.Combine(HostingEnvironment.MapPath("~/images/posts/"), Banner)))
+                {
+                    File.Delete(Path.Combine(HostingEnvironment.MapPath("~/images/posts/"), Banner));
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return true;
         }
 
         public IEnumerable<Posts> GetAll()

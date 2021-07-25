@@ -1,6 +1,4 @@
-﻿using Blog.Entity.User;
-using Blog.Panel.App_Start;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using static Blog.Web.FilterConfig;
 
 namespace Blog.Web.Controllers

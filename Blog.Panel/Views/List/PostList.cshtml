@@ -26,7 +26,7 @@
                             @foreach (var item in Model.data)
                             {
                                 <tr>
-                                    <td>@item.Title</td>
+                                    <td>@item.TitleTUR</td>
                                     <td>@item.UserID</td>
                                     <td style="width: 20px;"><button class="button background-primary" onclick="window.location.href='/post/@item.ID'">Düzenle</button></td>
                                     <td style="width: 20px;"><button class="button background-danger" data-toggle="modal" data-target="#delete" onclick="List.Delete(@item.ID)">Kaldır</button></td>
