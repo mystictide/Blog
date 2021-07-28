@@ -8,5 +8,8 @@ namespace Blog.Entity.Blog
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
+
+        [Write(false)]
+        public int PostCount { get; set; }
     }
 }

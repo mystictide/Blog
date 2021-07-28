@@ -1,4 +1,8 @@
-﻿ <!-- Footer-->
+﻿@{
+    string Culture = Request.Cookies["culture"].Value;
+}
+
+ <!-- Footer-->
 <footer class="border-top">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -29,7 +33,23 @@
                         </a>
                     </li>
                 </ul>
-                <div class="small text-center text-muted fst-italic"><i class="fas fa-heart"></i> ile yapıldı</div>
+                <ul class="inline-ul">
+                    <li>
+                        <a href="/lang/tr"><i class="flags tur"></i></a>
+                    </li>
+                    <li>
+                        <a href="/lang/en"><i class="flags eng"></i></a>
+                    </li>
+                </ul>
+                @if (Culture == "tr")
+                 {
+                    <div class="small text-center text-muted fst-italic"><i class="fas fa-heart"></i> @Lang.Global.MadeWith</div> 
+                 }
+
+                else
+                {
+                   <div class="small text-center text-muted fst-italic"> @Lang.Global.MadeWith <i class="fas fa-heart"></i></div>
+                }
             </div>
         </div>
     </div>

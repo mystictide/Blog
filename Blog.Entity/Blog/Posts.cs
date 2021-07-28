@@ -24,5 +24,8 @@ namespace Blog.Entity.Blog
 
         [Write(false)]
         public List<int> Categories { get; set; }
+
+        [Write(false)]
+        public string Author { get; set; }
     }
 }

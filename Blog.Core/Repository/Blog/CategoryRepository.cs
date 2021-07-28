@@ -113,9 +113,14 @@ namespace Blog.Core.Repository.Blog
         {
             try
             {
-                using (var con = GetConnection)
+                string query = $@"
+                Select *
+                ,(select COUNT(ID) from PostCategoryJunk Where CategoryID = t.ID)PostCount
+                FROM Categories t";
+
+                using (var connection = GetConnection)
                 {
-                    return con.GetAll<Categories>();
+                    return connection.Query<Categories>(query);
                 }
             }
             catch (Exception ex)

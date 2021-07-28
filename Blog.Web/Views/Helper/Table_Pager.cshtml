@@ -4,52 +4,11 @@
     var page = Model.CurrentPage == 0 ? 1 : Model.CurrentPage;
 }
 
-<div class="column">
-    <div class="row">
-        <div class="" style="margin-right:15px;">
-            <div class="kod-paging-info">
-                @if (Model.TotalItems == 0)
-                {
-                <span> Hiçbir girdi bulunamadı </span>
-                }
-                else
-                {
-                    @*<span> Listing items between @(Model.StartIndex + 1) and @(Model.EndIndex + 1) out of @Model.TotalItems. </span>*@
-                }
-            </div>
-        </div>
-        @if (Model.TotalItems != 0)
-        {
-            <div class="">
-                <div class="kod-paging">
-                    <ul class="pagination" style="display: flex; list-style-type: none;">
 
-                        <li> <a href="javascript:void(0)" onclick="Filter.Page(1)" style="margin-right: 2px;"> &laquo;&laquo; </a> </li>
-                        <li> <a href="javascript:void(0)" onclick="Filter.Page(@(page == 1 ? 1 : (page - 1)))" style="margin-right: 2px;"> &laquo; </a></li>
-
-                        @if (Model.Pages.FirstOrDefault() > 1)
-                        {
-                            <li> <a href="javascript:void(0)" style="margin-right: 2px;"> ... </a> </li>
-                        }
-
-                        @foreach (var p in Model.Pages)
-                        {
-                            var isCurrent = p == page ? "active" : "";
-                            <li class="page-item @isCurrent"><a class="page-link" href="javascript:void(0)" onclick="Filter.Page(@p)" style="margin-right: 2px;"> @p </a></li>
-                        }
-
-                        @if (Model.Pages.LastOrDefault() < Model.TotalPages)
-                        {
-                            <li> <a href="javascript:void(0)" style="margin-right: 2px;"> ... </a> </li>
-                        }
-
-                        <li> <a href="javascript:void(0)" onclick="Filter.Page(@(Model.TotalPages == page ? Model.TotalPages : (page + 1)))" style="margin-right: 2px;"> &raquo; </a> </li>
-                        <li> <a href="javascript:void(0)" onclick="Filter.Page(@Model.TotalPages)" style="margin-right: 2px;"> &raquo;&raquo; </a> </li>
-
-                    </ul>
-                </div>
-            </div>
-        }
-
+@if (Model.TotalItems != 0 && Model.TotalPages > 1)
+{
+    <div class="d-flex justify-content-end mb-4">
+        <a class="btn btn-primary text-uppercase" onclick="Filter.Page(@(Model.TotalPages == page ? Model.TotalPages : (page + 1)))">@Lang.Global.OlderPosts →</a>
     </div>
-</div>
+}
+

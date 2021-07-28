@@ -104,5 +104,10 @@ namespace Blog.Business.Blog
         {
             return _repo.Update(entity);
         }
+
+        public FilteredList<PostCategoryJunk> PostsbyCategory(FilteredList<PostCategoryJunk> request, int? CategoryID)
+        {
+            return _repo.PostsbyCategory(request, CategoryID);
+        }
     }
 }
