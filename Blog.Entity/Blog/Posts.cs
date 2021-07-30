@@ -27,5 +27,8 @@ namespace Blog.Entity.Blog
 
         [Write(false)]
         public string Author { get; set; }
+
+        [Write(false)]
+        public IEnumerable<Categories> Category { get; set; }
     }
 }

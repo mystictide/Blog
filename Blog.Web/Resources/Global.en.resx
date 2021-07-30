@@ -147,6 +147,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>No posts found in this category.</value>
+  </data>
   <data name="OlderPosts" xml:space="preserve">
     <value>Older Posts</value>
   </data>

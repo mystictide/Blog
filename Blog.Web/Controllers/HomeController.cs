@@ -73,6 +73,26 @@ namespace Blog.Web.Controllers
             return View(result);
         }
 
+        [Route("c/{CategoryID}")]
+        public ActionResult Categorized(Entity.Helpers.Filter filter, PostCategoryJunk filterModel, int CategoryID)
+        {
+            if (Request.Cookies["culture"] != null)
+            {
+                ViewBag.Culture = Request.Cookies["culture"].Value;
+            }
+            filter.Keyword = filter.Keyword ?? "";
+            filter.pageSize = 6;
+            filter.isDetailSearch = false;
+            FilteredList<PostCategoryJunk> request = new FilteredList<PostCategoryJunk>()
+            {
+                filter = filter,
+                filterModel = filterModel
+            };
+            FilteredList<PostCategoryJunk> result = new PostManager().PostsbyCategory(request, CategoryID);
+            ViewBag.Settings = settings;
+            return View(result);
+        }
+
         [Route("about")]
         public ActionResult About()
         {
@@ -115,7 +135,7 @@ namespace Blog.Web.Controllers
         public ActionResult Post(int ID)
         {
             ViewBag.Settings = settings;
-            var model = new PostManager().Get(ID);
+            var model = new PostManager().GetPostforView(ID);
             return View(model);
         }
     }

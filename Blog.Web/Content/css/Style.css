@@ -25,3 +25,9 @@
 .masthead {
   background: url(../img/header.jpg) no-repeat center !important;
   background-size: cover !important; }
+
+.mb-4 {
+  margin-top: 35px !important; }
+
+a img {
+  max-width: 85vw; }

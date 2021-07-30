@@ -5,6 +5,7 @@ namespace Blog.Core.Interface.Blog
 {
     public interface IPosts : IBaseInterface<Posts>
     {
-        FilteredList<PostCategoryJunk> PostsbyCategory(FilteredList<PostCategoryJunk> request, int? CategoryID);
+        FilteredList<PostCategoryJunk> PostsbyCategory(FilteredList<PostCategoryJunk> request, int CategoryID);
+        Posts GetPostforView(int ID);
     }
 }

@@ -151,6 +151,15 @@ namespace Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategoriye ait hiçbir yazı bulunamadı..
+        /// </summary>
+        public static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eski Yazılar.
         /// </summary>
         public static string OlderPosts {

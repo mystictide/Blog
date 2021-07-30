@@ -2,6 +2,32 @@
 
 @{ string Culture = Request.Cookies["culture"].Value; }
 
+@if (Culture == "tr")
+{
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 ">
+        <h2>@Model.Author</h2>
+    </div>
+    <div class="row gx-4 gx-lg-5 justify-content-md-start">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <h6>@Model.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.</h6>
+        </div>
+    </div>
+</div> }
+else
+{
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 text-center">
+        <h2>@Model.Author</h2>
+    </div>
+    <div class="row gx-4 gx-lg-5 justify-content-md-start">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <h6>Posted on @Model.Date.ToString("MMMM dd, yyyy")</h6>
+        </div>
+    </div>
+</div>}
+
+
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 text-center">
@@ -11,12 +37,30 @@
         {<h1>@Model.TitleENG</h1>}
         </div>
         <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            @if (Culture == "tr")
-            {@Html.Raw(Model.BodyTUR)}
-        else
-        {@Html.Raw(Model.BodyENG)}
+            <div class="col-md-10 col-lg-8 col-xl-9">
+                @if (Culture == "tr")
+                {@Html.Raw(Model.BodyTUR)}
+            else
+            {@Html.Raw(Model.BodyENG)}
+            </div>
         </div>
-        </div>
-</div>
+    </div>
 </article>
+
+<hr />
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 text-center">
+        <h5>Yazının bulunduğu kategoriler</h5>
+    </div>
+    <div class="row gx-4 gx-lg-5 justify-content-md-start">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <ul class="list-inline text-center">
+                @foreach (var item in Model.Category)
+                {
+                    <li class="list-inline-item"><a href="/c/@item.ID">@item.Name</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

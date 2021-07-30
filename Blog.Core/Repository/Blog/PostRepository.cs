@@ -104,7 +104,8 @@ namespace Blog.Core.Repository.Blog
 
                 string query = $@"
                 SELECT *
-                FROM Posts
+                ,(select Name from Users where ID = t.UserID) Author
+                FROM Posts t
                 WHERE ID = @ID";
 
                 string junkquery = $@"
@@ -116,6 +117,40 @@ namespace Blog.Core.Repository.Blog
                 {
                     var model = connection.QueryFirstOrDefault<Posts>(query, param);
                     model.Categories = connection.Query<int>(junkquery, param).ToList();
+                    return model;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogsRepository.CreateLog(ex);
+                return null;
+            }
+        }
+
+        public Posts GetPostforView(int ID)
+        {
+            try
+            {
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@ID", ID);
+
+                string query = $@"
+                SELECT *
+                ,(select Name from Users where ID = t.UserID) Author
+                FROM Posts t
+                WHERE ID = @ID";
+
+                string junkquery = $@"
+                SELECT CategoryID
+                ,(select Name from Categories where ID = t.CategoryID) as Name
+                ,(select ID from Categories where ID = t.CategoryID) as ID
+                FROM PostCategoryJunk t
+                WHERE PostID = @ID";
+
+                using (var connection = GetConnection)
+                {
+                    var model = connection.QueryFirstOrDefault<Posts>(query, param);
+                    model.Category = connection.Query<Categories>(junkquery, param).ToList();
                     return model;
                 }
             }
@@ -142,33 +177,27 @@ namespace Blog.Core.Repository.Blog
             }
         }
 
-        public FilteredList<PostCategoryJunk> PostsbyCategory(FilteredList<PostCategoryJunk> request, int? CategoryID)
+        public FilteredList<PostCategoryJunk> PostsbyCategory(FilteredList<PostCategoryJunk> request, int CategoryID)
         {
             try
             {
                 FilteredList<PostCategoryJunk> result = new FilteredList<PostCategoryJunk>();
                 DynamicParameters param = new DynamicParameters();
-                param.Add("@Keyword", request.filter.Keyword);
                 param.Add("@PageSize", request.filter.pageSize);
-
-                string Where = "";
-                
-                if (CategoryID.HasValue)
-                {
-                    param.Add("@CategoryID", CategoryID);
-                    Where = @" WHERE CategoryID = @CategoryID";
-                }
+                param.Add("@CategoryID", CategoryID);
+                string Where = @" WHERE CategoryID = @CategoryID";
 
                 string query_count = $@"  Select Count(t.ID) from Posts t";
 
                 string query = $@"
                 SELECT *
+                ,(select Name from Users where ID = c.UserID)Author
                 FROM PostCategoryJunk t
                 LEFT JOIN Posts c ON c.ID = t.PostID 
                 {Where}
                 ORDER BY t.ID DESC 
                 OFFSET @StartIndex ROWS
-                FETCH NEXT @PageSize ROWS ONLY";  
+                FETCH NEXT @PageSize ROWS ONLY";
 
                 using (var connection = GetConnection)
                 {
@@ -182,7 +211,7 @@ namespace Blog.Core.Repository.Blog
                             return p;
                         },
                         splitOn: "ID",
-                        param: new { param }).ToList();
+                        param: param).ToList();
                     result.filter = request.filter;
                     result.filterModel = request.filterModel;
                     return result;

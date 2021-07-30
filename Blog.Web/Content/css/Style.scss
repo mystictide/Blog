@@ -23,7 +23,7 @@
         display: inline-block;
 
         a {
-            display:flex;
+            display: flex;
             text-decoration: none;
         }
     }
@@ -32,4 +32,14 @@
 .masthead {
     background: url(../img/header.jpg) no-repeat center !important;
     background-size: cover !important;
+}
+
+.mb-4 {
+    margin-top: 35px !important;
+}
+
+a{
+    img{
+        max-width:85vw;
+    }
 }

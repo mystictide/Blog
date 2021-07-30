@@ -151,25 +151,12 @@
     <Content Include="Content\plugins\ckeditor\contents.css" />
     <Content Include="Content\plugins\ckeditor\lang\en.js" />
     <Content Include="Content\plugins\ckeditor\lang\tr.js" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\kama\balloonpanel.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\moono-lisa\balloonpanel.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\moono-lisa\images\close.png" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\moono-lisa\images\hidpi\close.png" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\moono\balloonpanel.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\moono\images\close.png" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloonpanel\skins\moono\images\hidpi\close.png" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloontoolbar\skins\default.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloontoolbar\skins\kama\balloontoolbar.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloontoolbar\skins\moono-lisa\balloontoolbar.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\balloontoolbar\skins\moono\balloontoolbar.css" />
     <Content Include="Content\plugins\ckeditor\plugins\clipboard\dialogs\paste.js" />
     <Content Include="Content\plugins\ckeditor\plugins\dialog\dialogDefinition.js" />
     <Content Include="Content\plugins\ckeditor\plugins\dialog\styles\dialog.css" />
-    <Content Include="Content\plugins\ckeditor\plugins\easyimage\dialogs\easyimagealt.js" />
-    <Content Include="Content\plugins\ckeditor\plugins\easyimage\styles\easyimage.css" />
     <Content Include="Content\plugins\ckeditor\plugins\icons.png" />
     <Content Include="Content\plugins\ckeditor\plugins\icons_hidpi.png" />
-    <Content Include="Content\plugins\ckeditor\plugins\imagebase\styles\imagebase.css" />
+    <Content Include="Content\plugins\ckeditor\plugins\image2\dialogs\image2.js" />
     <Content Include="Content\plugins\ckeditor\plugins\image\dialogs\image.js" />
     <Content Include="Content\plugins\ckeditor\plugins\image\images\noimage.png" />
     <Content Include="Content\plugins\ckeditor\plugins\link\dialogs\anchor.js" />
@@ -180,9 +167,6 @@
     <Content Include="Content\plugins\ckeditor\plugins\magicline\images\hidpi\icon.png" />
     <Content Include="Content\plugins\ckeditor\plugins\magicline\images\icon-rtl.png" />
     <Content Include="Content\plugins\ckeditor\plugins\magicline\images\icon.png" />
-    <Content Include="Content\plugins\ckeditor\plugins\pastefromgdocs\filter\default.js" />
-    <Content Include="Content\plugins\ckeditor\plugins\pastetools\filter\common.js" />
-    <Content Include="Content\plugins\ckeditor\plugins\pastetools\filter\image.js" />
     <Content Include="Content\plugins\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
     <Content Include="Content\plugins\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
     <Content Include="Content\plugins\ckeditor\plugins\specialchar\dialogs\lang\az.js" />
@@ -271,12 +255,14 @@
     <Content Include="Content\plugins\ckeditor\samples\old\dialog\assets\my_dialog.js" />
     <Content Include="Content\plugins\ckeditor\samples\old\dialog\dialog.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\divreplace.html" />
-    <Content Include="Content\plugins\ckeditor\samples\old\easyimage\easyimage.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\enterkey\enterkey.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\htmlwriter\assets\outputforflash\outputforflash.swf" />
     <Content Include="Content\plugins\ckeditor\samples\old\htmlwriter\assets\outputforflash\swfobject.js" />
     <Content Include="Content\plugins\ckeditor\samples\old\htmlwriter\outputforflash.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\htmlwriter\outputhtml.html" />
+    <Content Include="Content\plugins\ckeditor\samples\old\image2\assets\image1.jpg" />
+    <Content Include="Content\plugins\ckeditor\samples\old\image2\assets\image2.jpg" />
+    <Content Include="Content\plugins\ckeditor\samples\old\image2\image2.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\index.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\inlineall.html" />
     <Content Include="Content\plugins\ckeditor\samples\old\inlinebycode.html" />
@@ -382,6 +368,10 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <Content Include="Content\plugins\ckeditor\CHANGES.md" />
     <Content Include="Content\plugins\ckeditor\LICENSE.md" />
     <Content Include="Content\plugins\ckeditor\README.md" />
@@ -392,10 +382,6 @@
     <Content Include="Content\plugins\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Content\plugins\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Content\plugins\ckeditor\skins\moono-lisa\readme.md" />
-    <None Include="compilerconfig.json" />
-    <None Include="compilerconfig.json.defaults">
-      <DependentUpon>compilerconfig.json</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <Content Include="Views\Helper\Table_Pager.cshtml" />
     <Content Include="Views\Helper\Table_Search.cshtml" />
