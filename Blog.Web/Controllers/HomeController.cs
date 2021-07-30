@@ -1,6 +1,8 @@
 ﻿using Blog.Business.Blog;
+using Blog.Business.User;
 using Blog.Entity.Blog;
 using Blog.Entity.Helpers;
+using Blog.Entity.User;
 using Blog.Web.Models;
 using System;
 using System.Web;
@@ -12,6 +14,13 @@ namespace Blog.Web.Controllers
     [AllowAnonymous, RoutePrefix(""), Compress]
     public class HomeController : Controller
     {
+        private Settings settings;
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+            settings = new SettingsManager().Get(0);
+        }
+
         [Route("lang/{lang}")]
         public ActionResult ChangeLanguage(string lang)
         {
@@ -60,24 +69,52 @@ namespace Blog.Web.Controllers
                 filterModel = filterModel
             };
             FilteredList<Posts> result = new PostManager().FilteredList(request);
+            ViewBag.Settings = settings;
             return View(result);
         }
 
         [Route("about")]
         public ActionResult About()
         {
+            ViewBag.Settings = settings;
             return View();
         }
 
         [Route("contact")]
         public ActionResult Contact()
         {
-            return View();
+            ViewBag.Settings = settings;
+            var model = new ContactView();
+            return View(model);
+        }
+
+        [Route("contact"), HttpPost]
+        public ActionResult Contact(ContactView model)
+        {
+            ViewBag.Settings = settings;
+            var entity = new Contact();
+            entity.Name = model.Name;
+            entity.Mail = model.Mail;
+            entity.Message = model.Message;
+            entity.Phone = model.Phone.Replace("(", "").Replace(")", "").Replace(" ", "");
+            entity.Date = DateTime.Now;
+            entity.IsActive = true;
+            ProcessResult result = new ContactManager().Add(entity);
+            if (result.State == ProcessState.Success)
+            {
+                TempData["state"] = 1;
+            }
+            else
+            {
+                TempData["state"] = 2;
+            }
+            return Redirect("/contact");
         }
 
         [Route("post/{Title}/{ID}")]
         public ActionResult Post(int ID)
         {
+            ViewBag.Settings = settings;
             var model = new PostManager().Get(ID);
             return View(model);
         }

@@ -1,11 +1,19 @@
-﻿<!-- Page Header-->
+﻿@{ string Culture = Request.Cookies["culture"].Value;
+    var Settings = (Blog.Entity.Blog.Settings)ViewBag.Settings; }
+<!-- Page Header-->
 <header class="masthead">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Blog Adı#</h1>
-                    <span class="subheading">Blog açıklaması</span>
+                    @if (Culture == "tr")
+                    {
+        <h1>@Settings.TitleTUR</h1>
+                        <span class="subheading">@Settings.DescriptionTUR</span>}
+                    else
+                    {
+        <h1>@Settings.TitleENG</h1>
+                        <span class="subheading">@Settings.DescriptionENG</span>}
                 </div>
             </div>
         </div>

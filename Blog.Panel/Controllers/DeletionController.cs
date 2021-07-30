@@ -37,5 +37,12 @@ namespace Blog.Panel.Controllers
             new CategoryManager().Delete(modelID);
             return Redirect("/categories");
         }
+
+        [Route("message"), HttpPost]
+        public ActionResult DeleteMessage(int modelID)
+        {
+            new ContactManager().Delete(modelID);
+            return Redirect("/messages");
+        }
     }
 }

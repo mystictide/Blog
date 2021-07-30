@@ -1,0 +1,54 @@
+﻿@model Blog.Entity.User.Contact
+
+@{
+    ViewBag.Title = "Process Message";
+}
+
+<section id="main-content" class="column column-offset-15">
+    <div class="row grid-responsive">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h3>@Model.Name tarafından @Model.Date.ToString("dd MMMMM, yyyy") tarihinde gönderilen mesaj</h3>
+                </div>
+                <div class="card-block">
+                    <fieldset>
+                        <label for="Mail">Mail adresi</label>
+                        @Html.DisplayFor(model => model.Mail)
+                    </fieldset>
+                    <fieldset>
+                        <label for="Phone">Telefon Numarası</label>
+                        @Html.DisplayFor(model => model.Phone)
+                    </fieldset>
+                    <fieldset>
+                        <label for="Name">Mesaj içeriği</label>
+                        @Html.DisplayFor(model => model.Message)
+                    </fieldset>
+                </div>
+                <div class="card-block">
+                    <form action="/category" method="post">
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.ID)
+                        @Html.HiddenFor(model => model.IsActive)
+                        @Html.HiddenFor(model => model.Name)
+                        @Html.HiddenFor(model => model.Date)
+                        @Html.HiddenFor(model => model.Message)
+                        @Html.HiddenFor(model => model.Mail)
+                        @Html.HiddenFor(model => model.Phone)
+                        <fieldset>
+                            <label for="Name">Senin mesajın</label>
+                            <textarea id="msg" name="msg"></textarea>
+                        </fieldset>
+                        <input class="button-primary" type="submit" value="Cevaplandır">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section customScripts{
+    <script src="~/Content/plugins/validate/js/jquery.validate.min.js"></script>
+    <script src="~/Content/plugins/validate/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/plugins/validate/js/jquery.validate.overrides.js"></script>
+}

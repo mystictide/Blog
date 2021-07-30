@@ -1,0 +1,75 @@
+﻿@model Blog.Entity.Blog.Settings
+
+@{
+    ViewBag.Title = "Ayarları düzenle";
+}
+
+<section id="main-content" class="column column-offset-15">
+    <div class="row grid-responsive">
+        <div class="column ">
+            <div class="card">
+                <div class="card-title">
+                    <h3>Ayarlar</h3>
+                </div>
+                <div class="card-block">
+                    <form action="/settings" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <div style="display: block">
+                            <fieldset style="width: 350px; float:left; margin-right:35px">
+                                <label for="TitleTUR">Blog Başlığı (Türkçe)</label>
+                                @Html.TextBoxFor(model => model.TitleTUR)
+                            </fieldset>
+                            <fieldset style="width: 350px;">
+                                <label for="TitleENG">Blog Başlığı (İngilizce)</label>
+                                @Html.TextBoxFor(model => model.TitleENG)
+                            </fieldset>
+                        </div>
+                        <div style="display:block;">
+                            <fieldset style="width: 350px; float: left; margin-right: 35px ">
+                                <label for="DescriptionTUR">Blog Açıklaması (Türkçe)</label>
+                                @Html.TextBoxFor(model => model.DescriptionTUR)
+                            </fieldset>
+                            <fieldset style="width: 350px;">
+                                <label for="DescriptionENG">Blog Açıklaması (İngilizce)</label>
+                                @Html.TextBoxFor(model => model.DescriptionENG)
+                            </fieldset>
+                        </div>
+                        <fieldset>
+                            <label for="Instagram">Instagram</label>
+                            @Html.TextBoxFor(model => model.Instagram)
+                        </fieldset>
+                        <fieldset>
+                            <label for="Twitter">Twitter</label>
+                            @Html.TextBoxFor(model => model.Twitter)
+                        </fieldset>
+                        <fieldset>
+                            <label for="YouTube">YouTube</label>
+                            @Html.TextBoxFor(model => model.YouTube)
+                        </fieldset>
+                        <fieldset>
+                            <label for="Facebook">Facebook</label>
+                            @Html.TextBoxFor(model => model.Facebook)
+                        </fieldset>
+                        <fieldset>
+                            <label for="LinkedIn">LinkedIn</label>
+                            @Html.TextBoxFor(model => model.LinkedIn)
+                        </fieldset>
+                        <fieldset>
+                            <label for="Banner">Blog Banner Fotoğrafı</label>
+                            <input name="fileinput" type="file" id="fileinput" />
+                        </fieldset>
+                        <fieldset id="banner">
+                            <img src="~/images/banner/banner.jpg" width="735" height="300" />
+                        </fieldset>
+                        <input class="button-primary" type="submit" value="Kaydet">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section customScripts{
+    <link href="~/Content/plugins/jqueryui/css/jquery-ui.css" rel="stylesheet">
+    <script src="~/Content/js/Listing.js"></script>
+}

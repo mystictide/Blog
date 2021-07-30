@@ -409,6 +409,10 @@
     <Content Include="Views\Process\ProcessUser.cshtml" />
     <Content Include="Views\Process\ProcessPost.cshtml" />
     <Content Include="Views\Process\ProcessCategory.cshtml" />
+    <Content Include="Views\Process\ProcessSettings.cshtml" />
+    <Content Include="Views\List\MessageList.cshtml" />
+    <Content Include="Views\List\Partial\DeleteMessage.cshtml" />
+    <Content Include="Views\Process\ProcessMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.Business\Blog.Business.csproj">

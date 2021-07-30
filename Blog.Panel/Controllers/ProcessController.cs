@@ -100,7 +100,7 @@ namespace Blog.Panel.Controllers
             var model = new PostManager().Get(ID);
             new PostManager().DeleteBanner(model.Banner);
             model.Banner = null;
-            new PostManager().Update(model);       
+            new PostManager().Update(model);
             return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
@@ -128,6 +128,61 @@ namespace Blog.Panel.Controllers
                 result = new CategoryManager().Add(model);
             }
             return Redirect("~/categories/");
+        }
+
+        [Route("settings")]
+        public ActionResult ProcessSettings()
+        {
+            var model = new SettingsManager().Get(0);
+            return View(model);
+        }
+
+        [Route("settings"), HttpPost]
+        public ActionResult ProcessSettings(Settings model)
+        {
+            ProcessResult result = new ProcessResult();
+
+            result = new SettingsManager().Update(model);
+
+            try
+            {
+                foreach (string file in Request.Files)
+                {
+                    var FileData = Request.Files[file];
+                    if (FileData.ContentLength > 0)
+                    {
+                        string _Ext = Path.GetExtension(FileData.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/images/banner/"));
+                        if (!Directory.Exists(_path))
+                        {
+                            Directory.CreateDirectory(_path);
+                        }
+                        FileData.SaveAs(_path + "banner" + _Ext);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return Redirect("~/settings/");
+        }
+
+        [Route("message/{ID}")]
+        public ActionResult ProcessMessage(int ID)
+        {
+            var model = new ContactManager().Get(ID);
+            return View(model);
+        }
+
+        [Route("message"), HttpPost]
+        public ActionResult ProcessMessage(Contact model, string msg)
+        {
+            ProcessResult result = new ProcessResult();
+            model.IsActive = false;
+            //mail gönderme metodu
+            return Redirect("~/messages/");
         }
     }
 }

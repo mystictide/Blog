@@ -23,7 +23,7 @@ namespace Blog.Panel.Controllers
         public ActionResult UserList(Entity.Helpers.Filter filter, Users filterModel)
         {
             filter.Keyword = filter.Keyword ?? "";
-            filter.pageSize = 25;
+            filter.pageSize = 15;
             filter.isDetailSearch = false;
             FilteredList<Users> request = new FilteredList<Users>()
             {
@@ -38,7 +38,7 @@ namespace Blog.Panel.Controllers
         public ActionResult PostList(Entity.Helpers.Filter filter, Posts filterModel)
         {
             filter.Keyword = filter.Keyword ?? "";
-            filter.pageSize = 45;
+            filter.pageSize = 15;
             filter.isDetailSearch = false;
             FilteredList<Posts> request = new FilteredList<Posts>()
             {
@@ -53,7 +53,7 @@ namespace Blog.Panel.Controllers
         public ActionResult CategoryList(Entity.Helpers.Filter filter, Categories filterModel)
         {
             filter.Keyword = filter.Keyword ?? "";
-            filter.pageSize = 45;
+            filter.pageSize = 20;
             filter.isDetailSearch = false;
             FilteredList<Categories> request = new FilteredList<Categories>()
             {
@@ -61,6 +61,21 @@ namespace Blog.Panel.Controllers
                 filterModel = filterModel
             };
             FilteredList<Categories> result = new CategoryManager().FilteredList(request);
+            return View(result);
+        }
+
+        [Route("messages")]
+        public ActionResult MessageList(Entity.Helpers.Filter filter, Contact filterModel)
+        {
+            filter.Keyword = filter.Keyword ?? "";
+            filter.pageSize = 15;
+            filter.isDetailSearch = false;
+            FilteredList<Contact> request = new FilteredList<Contact>()
+            {
+                filter = filter,
+                filterModel = filterModel
+            };
+            FilteredList<Contact> result = new ContactManager().FilteredList(request);
             return View(result);
         }
     }

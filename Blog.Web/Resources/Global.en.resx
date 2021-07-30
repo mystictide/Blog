@@ -123,13 +123,40 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="EmailFormat" xml:space="preserve">
+    <value>Mail not in correct format</value>
+  </data>
+  <data name="FormNotSubmitted" xml:space="preserve">
+    <value>Error sending message!</value>
+  </data>
+  <data name="FormSubmitted" xml:space="preserve">
+    <value>Message submitted successfully!</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="MadeWith" xml:space="preserve">
     <value>Made with</value>
   </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail address</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="OlderPosts" xml:space="preserve">
     <value>Older Posts</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
   </data>
 </root>

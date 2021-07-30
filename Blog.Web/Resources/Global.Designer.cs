@@ -79,6 +79,33 @@ namespace Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mail doğru formatta değil.
+        /// </summary>
+        public static string EmailFormat {
+            get {
+                return ResourceManager.GetString("EmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mesajı gönderirken bir hata oluştu..
+        /// </summary>
+        public static string FormNotSubmitted {
+            get {
+                return ResourceManager.GetString("FormNotSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mesaj başarıyla gönderildi!.
+        /// </summary>
+        public static string FormSubmitted {
+            get {
+                return ResourceManager.GetString("FormSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Anasayfa.
         /// </summary>
         public static string Home {
@@ -97,11 +124,65 @@ namespace Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mail adresi.
+        /// </summary>
+        public static string Mail {
+            get {
+                return ResourceManager.GetString("Mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mesaj.
+        /// </summary>
+        public static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to İsim.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Eski Yazılar.
         /// </summary>
         public static string OlderPosts {
             get {
                 return ResourceManager.GetString("OlderPosts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gerekli alan.
+        /// </summary>
+        public static string Required {
+            get {
+                return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gönder.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
             }
         }
     }

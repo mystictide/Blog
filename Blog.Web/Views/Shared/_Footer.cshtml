@@ -1,37 +1,65 @@
-﻿@{
-    string Culture = Request.Cookies["culture"].Value;
-}
+﻿@{ string Culture = Request.Cookies["culture"].Value;
+                var Settings = (Blog.Entity.Blog.Settings)ViewBag.Settings; }
 
- <!-- Footer-->
+<!-- Footer-->
 <footer class="border-top">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <ul class="list-inline text-center">
-                    <li class="list-inline-item">
-                        <a href="#!">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="#!">
-                            <span class="fa-stack fa-lg">
-                                <i class="fas fa-circle fa-stack-2x"></i>
-                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
+                    @if (Settings.Twitter != null)
+                    {
+                <li class="list-inline-item">
+                    <a href="https://twitter.com/@Settings.Twitter">
+                        <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>}
+                    @if (Settings.Instagram != null)
+                    {
+                <li class="list-inline-item">
+                    <a href="https://www.instagram.com/@Settings.Instagram">
+                        <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+}
+                    @if (Settings.Facebook != null)
+                    {
+                <li class="list-inline-item">
+                    <a href="https://www.instagram.com/@Settings.Facebook">
+                        <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>}
+                    @if (Settings.YouTube != null)
+                    {
+                <li class="list-inline-item">
+                    <a href="https://www.youtube.com/c/@Settings.YouTube">
+                        <span class="fa-stack fa-lg">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>}
+                    @if (Settings.LinkedIn != null)
+                    {
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/@Settings.LinkedIn">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    }
+
                 </ul>
                 <ul class="inline-ul">
                     <li>
@@ -42,14 +70,12 @@
                     </li>
                 </ul>
                 @if (Culture == "tr")
-                 {
-                    <div class="small text-center text-muted fst-italic"><i class="fas fa-heart"></i> @Lang.Global.MadeWith</div> 
-                 }
+                {
+    <div class="small text-center text-muted fst-italic"><i class="fas fa-heart"></i> @Lang.Global.MadeWith</div> }
 
                 else
                 {
-                   <div class="small text-center text-muted fst-italic"> @Lang.Global.MadeWith <i class="fas fa-heart"></i></div>
-                }
+    <div class="small text-center text-muted fst-italic"> @Lang.Global.MadeWith <i class="fas fa-heart"></i></div>}
             </div>
         </div>
     </div>

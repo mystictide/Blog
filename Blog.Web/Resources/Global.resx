@@ -123,13 +123,40 @@
   <data name="Contact" xml:space="preserve">
     <value>İletişim</value>
   </data>
+  <data name="EmailFormat" xml:space="preserve">
+    <value>Mail doğru formatta değil</value>
+  </data>
+  <data name="FormNotSubmitted" xml:space="preserve">
+    <value>Mesajı gönderirken bir hata oluştu.</value>
+  </data>
+  <data name="FormSubmitted" xml:space="preserve">
+    <value>Mesaj başarıyla gönderildi!</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Anasayfa</value>
   </data>
   <data name="MadeWith" xml:space="preserve">
     <value>ile yapıldı</value>
   </data>
+  <data name="Mail" xml:space="preserve">
+    <value>Mail adresi</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Mesaj</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>İsim</value>
+  </data>
   <data name="OlderPosts" xml:space="preserve">
     <value>Eski Yazılar</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>Gerekli alan</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gönder</value>
   </data>
 </root>
