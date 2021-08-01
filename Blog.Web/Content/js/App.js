@@ -1,18 +1,8 @@
 ﻿var KodLoading = {
     open: function (duration) {
-        $('.kod-loading').fadeIn(duration == undefined ? 500 : duration);
+        
     },
     close: function (duration) {
-
-        try {
-            $('.kod-loading').fadeOut(duration == undefined ? 500 : duration);
-        }
-        catch (err) {
-
-        }
-        finally {
-            $('.kod-loading').hide();
-        }
 
     },
     refresh: function (url) {

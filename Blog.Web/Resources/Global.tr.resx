@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>Hakkımızda</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
   <data name="Contact" xml:space="preserve">
     <value>İletişim</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Telefon</value>
+  </data>
+  <data name="PostCategory" xml:space="preserve">
+    <value>Yazının bulunduğu kategoriler</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>Gerekli alan</value>

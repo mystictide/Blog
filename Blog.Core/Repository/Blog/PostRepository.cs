@@ -73,7 +73,7 @@ namespace Blog.Core.Repository.Blog
                 ,(select Name from Users where ID = t.UserID) Author
                 FROM Posts t 
                 {WhereClause} 
-                ORDER BY t.ID DESC 
+                ORDER BY t.Date DESC 
                 OFFSET @StartIndex ROWS
                 FETCH NEXT @PageSize ROWS ONLY";
 
@@ -195,7 +195,7 @@ namespace Blog.Core.Repository.Blog
                 FROM PostCategoryJunk t
                 LEFT JOIN Posts c ON c.ID = t.PostID 
                 {Where}
-                ORDER BY t.ID DESC 
+                ORDER BY c.Date DESC 
                 OFFSET @StartIndex ROWS
                 FETCH NEXT @PageSize ROWS ONLY";
 

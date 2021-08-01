@@ -69,6 +69,7 @@ namespace Blog.Web.Controllers
                 filterModel = filterModel
             };
             FilteredList<Posts> result = new PostManager().FilteredList(request);
+            ViewBag.Categories = new CategoryManager().GetAll();
             ViewBag.Settings = settings;
             return View(result);
         }
@@ -89,6 +90,7 @@ namespace Blog.Web.Controllers
                 filterModel = filterModel
             };
             FilteredList<PostCategoryJunk> result = new PostManager().PostsbyCategory(request, CategoryID);
+            ViewBag.Categories = new CategoryManager().GetAll();
             ViewBag.Settings = settings;
             return View(result);
         }
@@ -134,6 +136,7 @@ namespace Blog.Web.Controllers
         [Route("post/{Title}/{ID}")]
         public ActionResult Post(int ID)
         {
+            ViewBag.Categories = new CategoryManager().GetAll();
             ViewBag.Settings = settings;
             var model = new PostManager().GetPostforView(ID);
             return View(model);

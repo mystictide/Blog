@@ -1,47 +1,83 @@
 ﻿@model Blog.Entity.Blog.Posts
 
-@{ string Culture = Request.Cookies["culture"].Value; }
+@{ string Culture = Request.Cookies["culture"].Value;
+    var Categories = (List<Blog.Entity.Blog.Categories>)ViewBag.Categories;}
 
-@if (Culture == "tr")
-{
-<div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 ">
-        <h2>@Model.Author</h2>
-    </div>
-    <div class="row gx-4 gx-lg-5 justify-content-md-start">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            <h6>@Model.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.</h6>
+@*@if (Culture == "tr")
+    {
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+            <h2 class="author">@Model.Author</h2>
         </div>
-    </div>
-</div> }
-else
-{
-<div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 text-center">
-        <h2>@Model.Author</h2>
-    </div>
-    <div class="row gx-4 gx-lg-5 justify-content-md-start">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            <h6>Posted on @Model.Date.ToString("MMMM dd, yyyy")</h6>
+        <div class="row gx-4 gx-lg-5 justify-content-md-start">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h6 class="written">@Model.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.</h6>
+            </div>
         </div>
-    </div>
-</div>}
+    </div> }
+    else
+    {
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5">
+            <h2 class="author">@Model.Author</h2>
+        </div>
+        <div class="row gx-4 gx-lg-5 justify-content-md-start">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h6 class="written">Posted on @Model.Date.ToString("MMMM dd, yyyy")</h6>
+            </div>
+        </div>
+    </div>}*@
 
 
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 text-center">
-            @if (Culture == "tr")
-            {<h1>@Model.TitleTUR</h1>}
-        else
-        {<h1>@Model.TitleENG</h1>}
-        </div>
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="row gx-4 gx-lg-6 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-9">
                 @if (Culture == "tr")
-                {@Html.Raw(Model.BodyTUR)}
-            else
-            {@Html.Raw(Model.BodyENG)}
+                {<h2 class="post-title text-center">@Model.TitleTUR</h2>
+                                @Html.Raw(Model.BodyTUR)}
+                            else if (Culture != "tr" && Model.BodyENG == null)
+                            {
+                                {
+                <h2 class="post-title text-center">@Model.TitleTUR</h2>
+                                    @Html.Raw(Model.BodyTUR)}
+                            }
+                            else
+                            {
+                <h2 class="post-title">@Model.TitleENG</h2>
+                                @Html.Raw(Model.BodyENG)}
+            </div>
+            <div class="col-md-5 col-lg-5 col-xl-2 p-4 author-block">
+                @if (Culture == "tr")
+                {
+    <div class="col-md-5 col-lg-5 col-xl-2 full-width author-div">
+        <div class="row gx-4 gx-lg-5">
+            <h2 class="author">@Model.Author</h2>
+        </div>
+        <div class="row gx-4 gx-lg-5 d-block">
+            <div class="col-md-10 col-lg-8 col-xl-7 full-width">
+                <h6 class="smaller">@Model.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.</h6>
+            </div>
+        </div>
+    </div> }
+else
+{
+<div class="col-md-5 col-lg-5 col-xl-2 full-width author-div">
+    <div class="row gx-4 gx-lg-5">
+        <h2 class="author">@Model.Author</h2>
+    </div>
+    <div class="row gx-4 gx-lg-5 d-block">
+        <div class="col-md-10 col-lg-8 col-xl-7 full-width">
+            <h6 class="smaller">Posted on @Model.Date.ToString("MMMM dd, yyyy")</h6>
+        </div>
+    </div>
+</div>}
+                <h6 class="font-segoe">@Lang.Global.Categories</h6>
+                <ul class="category-list">
+                    @foreach (var item in Categories)
+                    {
+        <li><a href="/c/@item.ID">@item.Name (@item.PostCount)</a></li>}
+                </ul>
             </div>
         </div>
     </div>
@@ -51,15 +87,15 @@ else
 
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 text-center">
-        <h5>Yazının bulunduğu kategoriler</h5>
+        <h5 class="written">@Lang.Global.PostCategory</h5>
     </div>
     <div class="row gx-4 gx-lg-5 justify-content-md-start">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <ul class="list-inline text-center">
                 @foreach (var item in Model.Category)
                 {
-                    <li class="list-inline-item"><a href="/c/@item.ID">@item.Name</a></li>
-                }
+    <li class="list-inline-item category written"><a href="/c/@item.ID">@item.Name</a></li>
+}
             </ul>
         </div>
     </div>

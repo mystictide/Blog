@@ -3,6 +3,9 @@ using Blog.Entity.User;
 using Blog.Core.Interface.User;
 using Blog.Core.Repository.User;
 using System.Collections.Generic;
+using System.IO;
+using System.Web.Hosting;
+using System;
 
 namespace Blog.Business.User
 {
@@ -30,7 +33,33 @@ namespace Blog.Business.User
 
         public ProcessResult Delete(int ID)
         {
-            return _repo.Delete(ID);
+            var model = new UserManager().Get(ID);
+            try
+            {
+                if (File.Exists(Path.Combine(HostingEnvironment.MapPath("~/images/authors/"), model.Picture)))
+                {
+                    File.Delete(Path.Combine(HostingEnvironment.MapPath("~/images/authors/"), model.Picture));
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return _repo.Delete(ID);       
+        }
+
+        public bool DeletePicture(string Picture)
+        {
+            try
+            {
+                if (File.Exists(Path.Combine(HostingEnvironment.MapPath("~/images/authors/"), Picture)))
+                {
+                    File.Delete(Path.Combine(HostingEnvironment.MapPath("~/images/authors/"), Picture));
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return true;
         }
 
         public FilteredList<Users> FilteredList(FilteredList<Users> request)

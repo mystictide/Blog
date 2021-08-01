@@ -1,47 +1,57 @@
 ﻿@model Blog.Entity.Helpers.FilteredList<Blog.Entity.Blog.Posts>
 
-@{ string Culture = ViewBag.Culture; }
+@{ string Culture = ViewBag.Culture;
+    var Categories = (List<Blog.Entity.Blog.Categories>)ViewBag.Categories; }
 
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            <!-- Post preview-->
             @foreach (var item in Model.data)
             {
                 if (Culture == "tr")
                 {
-                    <div class="post-preview">
-                        <a href="/post/@Blog.Web.Helpers.CustomTagHelpers.FriendlyURLTitle(item.TitleTUR)/@item.ID">
-                            <h2 class="post-title">@item.TitleTUR</h2>
-                            <h3 class="post-subtitle">@item.SummaryTUR</h3>
-                        </a>
-                        <p class="post-meta">
-                            <a href="#!">@item.Author</a>
-                            tarafından
-                            @item.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.
-                        </p>
-                    </div>
-                    <hr class="my-4" />
-                }
+<div class="post-preview">
+    <a href="/post/@Blog.Web.Helpers.CustomTagHelpers.FriendlyURLTitle(item.TitleTUR)/@item.ID">
+        <h2 class="post-title">@item.TitleTUR</h2>
+        <h3 class="post-subtitle">@item.SummaryTUR</h3>
+    </a>
+    <p class="post-meta">
+        <a href="#!">@item.Author</a>
+        tarafından
+        @item.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.
+    </p>
+</div>
+                    <hr class="my-4" /> }
                 else
                 {
-                    <div class="post-preview">
-                        <a href="/post/@Blog.Web.Helpers.CustomTagHelpers.FriendlyURLTitle(item.TitleENG)/@item.ID">
-                            <h2 class="post-title">@item.TitleENG</h2>
-                            <h3 class="post-subtitle">@item.SummaryENG</h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a href="#!">@item.Author</a>
-                            on @item.Date.ToString("MMMM dd, yyyy")
-                        </p>
-                    </div>
-                    <hr class="my-4" />
-                }
+<div class="post-preview">
+    <a href="/post/@Blog.Web.Helpers.CustomTagHelpers.FriendlyURLTitle(item.TitleENG)/@item.ID">
+        <h2 class="post-title">@item.TitleENG</h2>
+        <h3 class="post-subtitle">@item.SummaryENG</h3>
+    </a>
+    <p class="post-meta">
+        Posted by
+        <a href="#!">@item.Author</a>
+        on @item.Date.ToString("MMMM dd, yyyy")
+    </p>
+</div>
+                    <hr class="my-4" />}
             }
-            <!-- Pager-->
             @Html.Partial("/Views/Helper/Table_Pager.cshtml", Model.filter.pager)
-           
+
+        </div>
+        <div class="col-md-5 col-lg-5 col-xl-2">
+            <h6 class="font-segoe">@Lang.Global.Categories</h6>
+            <ul class="category-list">
+                @foreach (var item in Categories)
+                {
+    <li><a href="/c/@item.ID">@item.Name (@item.PostCount)</a></li>
+}
+            </ul>
         </div>
     </div>
 </div>
+
+@section customScripts{
+    <script src="~/Content/js/App.js"></script>
+}

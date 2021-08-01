@@ -70,6 +70,15 @@ namespace Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategoriler.
+        /// </summary>
+        public static string Categories {
+            get {
+                return ResourceManager.GetString("Categories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to İletişim.
         /// </summary>
         public static string Contact {
@@ -174,6 +183,15 @@ namespace Lang {
         public static string Phone {
             get {
                 return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yazının bulunduğu kategoriler.
+        /// </summary>
+        public static string PostCategory {
+            get {
+                return ResourceManager.GetString("PostCategory", resourceCulture);
             }
         }
         

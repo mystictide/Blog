@@ -37,11 +37,53 @@ namespace Blog.Panel.Controllers
         public ActionResult ProcessUser(Users model)
         {
             ProcessResult result = new ProcessResult();
-            if (model != null)
+            if (model.ID > 0)
             {
+                var user = new UserManager().Get(model.ID);
+                model.Picture = user.Picture;
                 result = new UserManager().Update(model);
             }
-            return Redirect("~/users");
+            else
+            {
+                result = new UserManager().Add(model);
+            }
+
+            try
+            {
+                foreach (string file in Request.Files)
+                {
+                    var FileData = Request.Files[file];
+                    if (FileData.ContentLength > 0)
+                    {
+                        string _Ext = Path.GetExtension(FileData.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/images/authors/"));
+                        if (!Directory.Exists(_path))
+                        {
+                            Directory.CreateDirectory(_path);
+                        }
+                        FileData.SaveAs(_path + result.ReturnID + _Ext);
+                        model.ID = result.ReturnID;
+                        model.Picture = result.ReturnID + _Ext;
+                        new UserManager().Update(model);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+            return Redirect("~/user/" + result.ReturnID);
+        }
+
+        [Route("user/delpicture/")]
+        public JsonResult DeletePicture(int ID)
+        {
+            var model = new UserManager().Get(ID);
+            new UserManager().DeletePicture(model.Picture);
+            model.Picture = null;
+            new UserManager().Update(model);
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
         }
 
         [Route("post/{ID?}")]
