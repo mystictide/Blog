@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Yazı düzenle";
     var CategoryList = (List<Blog.Entity.Blog.Categories>)ViewBag.Categories;
+    var Users = (IEnumerable<Blog.Entity.User.Users>)ViewBag.Users;
     var selected = (List<int>)Model.Categories;
 }
 
@@ -61,7 +62,7 @@
                                 <label for="Categories">Kategoriler</label>
                                 @Html.ListBox("drop", new MultiSelectList(CategoryList, "ID", "Name", Model.Categories), new { @class = "form-control", @data_placeholder = "Kategori seçiniz" })
                             </fieldset>
-                        </div>                     
+                        </div>
                         <fieldset style="max-width: 735px;">
                             <label for="Body">İçerik (Türkçe)</label>
                             @Html.TextAreaFor(model => model.BodyTUR)
@@ -69,6 +70,23 @@
                         <fieldset style="max-width: 735px;">
                             <label for="Body">İçerik (İngilizce)</label>
                             @Html.TextAreaFor(model => model.BodyENG)
+                        </fieldset>
+                        <fieldset style="width: 350px; height: 90px;">
+                            <label for="Contributor">Katkıda Bulunan Yazar</label>
+                            <select class="form-control" id="ContributorID" name="ContributorID">
+                                <option>Yazar seçiniz..</option>
+                                @foreach (var item in Users)
+                                {
+                                    if (Model.ContributorID != null && item.ID == Model.ContributorID)
+                                    {
+                                        <option selected value="@item.ID">@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.ID">@item.Name</option>
+                                    }
+                                }
+                            </select>
                         </fieldset>
                         <fieldset>
                             <label for="Banner">Banner Fotoğrafı (opsiyonel)</label>
@@ -108,6 +126,7 @@
         });
 
         $("#drop").chosen();
+        //$("#drop2").chosen();
         $("#Date").datepicker({
             changeYear: true,
             changeMonth: true,

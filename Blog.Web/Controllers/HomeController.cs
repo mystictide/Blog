@@ -70,6 +70,7 @@ namespace Blog.Web.Controllers
             };
             FilteredList<Posts> result = new PostManager().FilteredList(request);
             ViewBag.Categories = new CategoryManager().GetAll();
+            ViewBag.Title = Lang.Global.Home;
             ViewBag.Settings = settings;
             return View(result);
         }
@@ -91,6 +92,7 @@ namespace Blog.Web.Controllers
             };
             FilteredList<PostCategoryJunk> result = new PostManager().PostsbyCategory(request, CategoryID);
             ViewBag.Categories = new CategoryManager().GetAll();
+            ViewBag.Title = new CategoryManager().Get(CategoryID).Name;
             ViewBag.Settings = settings;
             return View(result);
         }
@@ -98,6 +100,7 @@ namespace Blog.Web.Controllers
         [Route("about")]
         public ActionResult About()
         {
+            ViewBag.Title = Lang.Global.About;
             ViewBag.Settings = settings;
             return View();
         }
@@ -105,6 +108,7 @@ namespace Blog.Web.Controllers
         [Route("contact")]
         public ActionResult Contact()
         {
+            ViewBag.Title = Lang.Global.Contact;
             ViewBag.Settings = settings;
             var model = new ContactView();
             return View(model);
@@ -139,7 +143,41 @@ namespace Blog.Web.Controllers
             ViewBag.Categories = new CategoryManager().GetAll();
             ViewBag.Settings = settings;
             var model = new PostManager().GetPostforView(ID);
+            if (Request.Cookies["culture"] != null)
+            {
+                if (Request.Cookies["culture"].Value == "tr")
+                {
+                    ViewBag.Title = model.TitleTUR;
+                }
+                else
+                {
+                    ViewBag.Title = model.TitleENG;
+                }
+            }
+            
             return View(model);
+        }
+
+        [Route("{Author}/{AuthorID}")]
+        public ActionResult Author(Entity.Helpers.Filter filter, Posts filterModel, string Author, int AuthorID)
+        {
+            if (Request.Cookies["culture"] != null)
+            {
+                ViewBag.Culture = Request.Cookies["culture"].Value;
+            }
+            filter.Keyword = filter.Keyword ?? "";
+            filter.pageSize = 6;
+            filter.isDetailSearch = false;
+            filterModel.UserID = AuthorID;
+            FilteredList<Posts> request = new FilteredList<Posts>()
+            {
+                filter = filter,
+                filterModel = filterModel
+            };
+            FilteredList<Posts> result = new PostManager().FilteredList(request);
+            ViewBag.Title = Author;
+            ViewBag.Settings = settings;
+            return View(result);
         }
     }
 }

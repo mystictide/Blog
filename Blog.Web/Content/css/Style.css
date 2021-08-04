@@ -42,7 +42,7 @@ a img {
   font-family: 'Segoe Script'; }
 
 .author {
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-family: 'Segoe Script'; }
 
 .written {
@@ -93,3 +93,9 @@ a img {
   .author-block {
     flex: 0 0 auto;
     width: 22%; } }
+
+.author-subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 0.625rem;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }

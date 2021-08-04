@@ -11,6 +11,7 @@ namespace Blog.Entity.Blog
         [Key]
         public int ID { get; set; }
         public int UserID { get; set; }
+        public int? ContributorID { get; set; }
         public string TitleTUR { get; set; }
         public string TitleENG { get; set; }
         public string SummaryTUR { get; set; }
@@ -27,6 +28,12 @@ namespace Blog.Entity.Blog
 
         [Write(false)]
         public string Author { get; set; }
+
+        [Write(false)]
+        public string ContributingAuthor { get; set; }
+
+        [Write(false)]
+        public string Bio { get; set; }
 
         [Write(false)]
         public IEnumerable<Categories> Category { get; set; }

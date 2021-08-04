@@ -66,11 +66,19 @@ namespace Blog.Core.Repository.Blog
 
                 string WhereClause = @" WHERE (t.TitleTUR like '%' + @Keyword + '%')";
 
+                if (request.filterModel.UserID > 0)
+                {
+                    param.Add("@UserID", request.filterModel.UserID);
+                    WhereClause = @" WHERE UserID = @UserID AND (t.TitleTUR like '%' + @Keyword + '%')";
+                }            
+
                 string query_count = $@"  Select Count(t.ID) from Posts t {WhereClause}";
 
                 string query = $@"
                 SELECT *
                 ,(select Name from Users where ID = t.UserID) Author
+                ,(select Name from Users where ID = t.ContributorID) ContributingAuthor
+                ,(select Bio from Users where ID = t.UserID) Bio
                 FROM Posts t 
                 {WhereClause} 
                 ORDER BY t.Date DESC 
@@ -105,6 +113,7 @@ namespace Blog.Core.Repository.Blog
                 string query = $@"
                 SELECT *
                 ,(select Name from Users where ID = t.UserID) Author
+                ,(select Name from Users where ID = t.ContributorID) ContributingAuthor
                 FROM Posts t
                 WHERE ID = @ID";
 
@@ -137,6 +146,7 @@ namespace Blog.Core.Repository.Blog
                 string query = $@"
                 SELECT *
                 ,(select Name from Users where ID = t.UserID) Author
+                ,(select Name from Users where ID = t.ContributorID) ContributingAuthor
                 FROM Posts t
                 WHERE ID = @ID";
 
@@ -192,6 +202,7 @@ namespace Blog.Core.Repository.Blog
                 string query = $@"
                 SELECT *
                 ,(select Name from Users where ID = c.UserID)Author
+                ,(select Name from Users where ID = c.ContributorID)ContributingAuthor
                 FROM PostCategoryJunk t
                 LEFT JOIN Posts c ON c.ID = t.PostID 
                 {Where}

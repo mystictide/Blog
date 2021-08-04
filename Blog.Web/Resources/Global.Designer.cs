@@ -70,6 +70,15 @@ namespace Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ve .
+        /// </summary>
+        public static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kategoriler.
         /// </summary>
         public static string Categories {
@@ -160,11 +169,20 @@ namespace Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kategoriye ait hiçbir yazı bulunamadı..
+        ///   Looks up a localized string similar to Kategoriye ait hiçbir yazı bulunamadı.
         /// </summary>
         public static string NotFound {
             get {
                 return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bu yazara ait hiçbir yazı bulunamadı.
+        /// </summary>
+        public static string NotFoundAuthor {
+            get {
+                return ResourceManager.GetString("NotFoundAuthor", resourceCulture);
             }
         }
         

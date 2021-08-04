@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>and </value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
   </data>
@@ -151,7 +154,10 @@
     <value>Name</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>No posts found in this category.</value>
+    <value>No posts found in this category</value>
+  </data>
+  <data name="NotFoundAuthor" xml:space="preserve">
+    <value>No posts found written by this author</value>
   </data>
   <data name="OlderPosts" xml:space="preserve">
     <value>Older Posts</value>

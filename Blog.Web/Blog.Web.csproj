@@ -241,6 +241,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Post.cshtml" />
     <Content Include="Views\Home\Categorized.cshtml" />
+    <Content Include="Views\Home\Author.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Blog.Business\Blog.Business.csproj">

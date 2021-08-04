@@ -6,6 +6,7 @@ using Blog.Entity.User;
 using Blog.Panel.App_Start;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using static Blog.Panel.FilterConfig;
 
@@ -95,7 +96,7 @@ namespace Blog.Panel.Controllers
             {
                 model = new PostManager().Get(ID.Value);
             }
-
+            ViewBag.Users = new UserManager().GetAll().Where(m => m.ID != model.UserID);
             return View(model);
         }
 

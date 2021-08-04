@@ -3,32 +3,6 @@
 @{ string Culture = Request.Cookies["culture"].Value;
     var Categories = (List<Blog.Entity.Blog.Categories>)ViewBag.Categories;}
 
-@*@if (Culture == "tr")
-    {
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <h2 class="author">@Model.Author</h2>
-        </div>
-        <div class="row gx-4 gx-lg-5 justify-content-md-start">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <h6 class="written">@Model.Date.ToString("dd MMMM, yyyy") tarihinde yazıldı.</h6>
-            </div>
-        </div>
-    </div> }
-    else
-    {
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5">
-            <h2 class="author">@Model.Author</h2>
-        </div>
-        <div class="row gx-4 gx-lg-5 justify-content-md-start">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <h6 class="written">Posted on @Model.Date.ToString("MMMM dd, yyyy")</h6>
-            </div>
-        </div>
-    </div>}*@
-
-
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-6 justify-content-center">
@@ -52,7 +26,11 @@
                 {
     <div class="col-md-5 col-lg-5 col-xl-2 full-width author-div">
         <div class="row gx-4 gx-lg-5">
-            <h2 class="author">@Model.Author</h2>
+            <h2 class="author">
+                @Model.Author @if (Model.ContributorID != null)
+                        {
+            @Lang.Global.And @Model.ContributingAuthor}
+            </h2>
         </div>
         <div class="row gx-4 gx-lg-5 d-block">
             <div class="col-md-10 col-lg-8 col-xl-7 full-width">
@@ -64,7 +42,11 @@ else
 {
 <div class="col-md-5 col-lg-5 col-xl-2 full-width author-div">
     <div class="row gx-4 gx-lg-5">
-        <h2 class="author">@Model.Author</h2>
+        <h2 class="author">
+            @Model.Author @if (Model.ContributorID != null)
+                {
+        @Lang.Global.And @Model.ContributingAuthor}
+        </h2>
     </div>
     <div class="row gx-4 gx-lg-5 d-block">
         <div class="col-md-10 col-lg-8 col-xl-7 full-width">
@@ -89,7 +71,7 @@ else
     <div class="row gx-4 gx-lg-5 text-center">
         <h5 class="written">@Lang.Global.PostCategory</h5>
     </div>
-    <div class="row gx-4 gx-lg-5 justify-content-md-start">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
             <ul class="list-inline text-center">
                 @foreach (var item in Model.Category)

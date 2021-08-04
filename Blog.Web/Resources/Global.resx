@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>Hakkımızda</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>ve </value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Kategoriler</value>
   </data>
@@ -151,7 +154,10 @@
     <value>İsim</value>
   </data>
   <data name="NotFound" xml:space="preserve">
-    <value>Kategoriye ait hiçbir yazı bulunamadı.</value>
+    <value>Kategoriye ait hiçbir yazı bulunamadı</value>
+  </data>
+  <data name="NotFoundAuthor" xml:space="preserve">
+    <value>Bu yazara ait hiçbir yazı bulunamadı</value>
   </data>
   <data name="OlderPosts" xml:space="preserve">
     <value>Eski Yazılar</value>
